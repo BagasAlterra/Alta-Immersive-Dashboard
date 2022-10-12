@@ -2,20 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: "rotunda-regular";
-  src: url("../public/fonts/Fontspring-DEMO-4a-rotunda-regular.otf");
-}
-
-@font-face {
-  font-family: "rotunda-medium";
-  src: url("../public/fonts/Fontspring-DEMO-5a-rotunda-medium.otf");
-}
-
-@font-face {
-  font-family: "rotunda-bold";
-  src: url("../public/fonts/Fontspring-DEMO-6a-rotunda-bold.otf");
-}
 
 
 body {

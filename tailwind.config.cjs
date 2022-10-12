@@ -11,9 +11,7 @@ module.exports = {
         "alta-border": "#E5E7EB",
       },
       fontFamily: {
-        "rotunda-regular": ["rotunda-regular", "rotunda"],
-        "rotunda-medium": ["rotunda-medium", "rotunda"],
-        "rotunda-bold": ["rotunda-bold", "rotunda"],
+        inter: ["Inter", "inter"],
       },
     },
   },
