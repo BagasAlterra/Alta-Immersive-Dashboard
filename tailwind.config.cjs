@@ -9,6 +9,11 @@ module.exports = {
         "alta-orange": "#EF6236",
         "alta-background": "#F4F7FC",
       },
+      fontFamily: {
+        "rotunda-regular": ["rotunda-regular", "rotunda"],
+        "rotunda-medium": ["rotunda-medium", "rotunda"],
+        "rotunda-bold": ["rotunda-bold", "rotunda"],
+      },
     },
   },
   plugins: [require("daisyui")],
