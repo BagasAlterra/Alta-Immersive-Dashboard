@@ -9,37 +9,23 @@ interface Props {
     onClick?: React.MouseEventHandler
 }
 
-const Button: FC<Props> = ({ type, fill, unfill, inactive, onClick, title }) => {
+const Button: FC<Props> = ({ type, fill, unfill, inactive, title, onClick }) => {
     return (
         <>
             {
-                type === 'short' ?
+                type === "short" ?
+                    <button className={
+                        fill ? "rounded-xl bg-alta-orange font-inter font-bold text-white text-xs h-10 w-20" :
+                            unfill ? "rounded-xl bg-white border border-alta-orange font-inter font-bold text-alta-orange text-xs h-10 w-20 " :
+                                inactive ? "rounded-xl bg-alta-border font-inter font-bold text-white text-xs h-10 w-20" : ""
+                    } onClick={onClick}>
+                        {title}
+                    </button>
+                    :
                     <>
                         {
-                            fill ?
-                                <button className='rounded-xl bg-alta-orange font-rotunda-bold text-white text-xs h-10 w-20' onClick={onClick}>
-                                    {title}
-                                </button> :
-                                <>
-                                    {unfill ?
-                                        <button className='rounded-xl bg-white border border-alta-orange font-rotunda-bold text-alta-orange text-xs h-10 w-20 ' onClick={onClick}>
-                                            {title}
-                                        </button> :
-                                        <>
-                                            {inactive &&
-                                                <button className='rounded-xl bg-alta-border font-rotunda-bold text-white text-xs h-10 w-20'>
-                                                    {title}
-                                                </button>
-                                            }
-                                        </>
-                                    }
-                                </>
-                        }
-                    </> :
-                    <>
-                        {
-                            type === 'long' &&
-                            <button className='rounded-xl bg-alta-orange font-rotunda-bold text-white text-xs h-10 w-40' onClick={onClick}>
+                            type === "long" &&
+                            <button className='rounded-xl bg-alta-orange font-inter font-bold text-white text-xs h-10 w-40' onClick={onClick}>
                                 {title}
                             </button>
                         }
