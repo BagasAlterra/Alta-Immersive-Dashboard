@@ -10,9 +10,9 @@ module.exports = {
         "alta-background": "#F4F7FC",
         "alta-border": "#E5E7EB",
       },
-      fontFamily: {
-        inter: ["Inter", "inter"],
-      },
+    },
+    fontFamily: {
+      inter: ["Inter", "inter"],
     },
   },
   plugins: [require("daisyui")],
