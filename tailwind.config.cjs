@@ -8,7 +8,11 @@ module.exports = {
         "alta-space-cadet": "#152C59",
         "alta-orange": "#EF6236",
         "alta-background": "#F4F7FC",
+        "alta-border": "#E5E7EB",
       },
+    },
+    fontFamily: {
+      inter: ["Inter", "inter"],
     },
   },
   plugins: [require("daisyui")],
