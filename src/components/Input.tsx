@@ -19,18 +19,18 @@ const Input: FC<Props> = ({ size, value, outline, type, name, id, placeholder, o
                 className={
                     outline === true ?
                         `  <>
-                            ${size === "long" ? "bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded h-9 w-5/6 pl-2" :
-                            size === "medium" ? "bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded h-9 w-1/3 pl-2" :
-                                size === "small" ? "bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded h-9 w-1/5 pl-2" :
-                                    size === "xtra-small" && "bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded h-9 w-1/6 pl-2"
+                            ${size === "long" ? "bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded input-md w-5/6 pl-2" :
+                            size === "medium" ? "bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded input-md w-1/3 pl-2" :
+                                size === "short" ? "bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded input-md w-1/5 pl-2" :
+                                    size === "xtra-short" && "bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded input-md w-1/6 pl-2"
                         }
                            </>`
                         :
                         `  <>
-                        ${size === "long" ? "bg-gray-50  text-gray-900 text-sm rounded h-9 w-5/6 pl-2" :
-                            size === "medium" ? "bg-gray-50  text-gray-900 text-sm rounded h-9 w-1/3 pl-2" :
-                                size === "small" ? "bg-gray-50  text-gray-900 text-sm rounded h-9 w-1/5 pl-2" :
-                                    size === "xtra-small" && "bg-gray-50  text-gray-900 text-sm rounded h-9 w-1/6 pl-2"
+                        ${size === "long" ? "bg-gray-50  text-gray-900 text-sm rounded input-md w-5/6 pl-2" :
+                            size === "medium" ? "bg-gray-50  text-gray-900 text-sm rounded input-md w-1/3 pl-2" :
+                                size === "short" ? "bg-gray-50  text-gray-900 text-sm rounded input-md w-1/5 pl-2" :
+                                    size === "xtra-short" && "bg-gray-50  text-gray-900 text-sm rounded input-md w-1/6 pl-2"
                         }
                            </>`
                 }
