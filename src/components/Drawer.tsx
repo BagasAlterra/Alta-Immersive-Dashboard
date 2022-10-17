@@ -14,7 +14,7 @@ const Drawer = () => {
       style={{
         borderRight: "5px solid #243a63",
       }}
-      breakPoint="md"
+      breakPoint="lg"
     >
       <Menu
         renderMenuItemStyles={({ active }) => ({
@@ -25,7 +25,7 @@ const Drawer = () => {
           },
           ".menu-anchor": {
             backgroundColor: active ? "#313741" : "initial",
-            color: "#94A3B8",
+            color: "#FFF",
           },
           ".sub-menu-content": {
             backgroundColor: "#152C59",
@@ -33,17 +33,23 @@ const Drawer = () => {
           },
         })}
       >
-        <MenuItem href="/" icon={<HomeIcon />}>
+        <MenuItem icon={<HomeIcon />} href="/">
           Dashboard
         </MenuItem>
         <SubMenu label="Mentee" icon={<UserCircleIcon />}>
-          <MenuItem>Mentee List</MenuItem>
+          <MenuItem href="/mentees">Mentee List</MenuItem>
           <MenuItem>Add Mentee</MenuItem>
         </SubMenu>
         <div className="divider my-0"></div>
-        <MenuItem icon={<UsersIcon />}>User</MenuItem>
-        <MenuItem icon={<BookOpenIcon />}>Class</MenuItem>
-        <MenuItem icon={<QueueListIcon />}>Status</MenuItem>
+        <MenuItem icon={<UsersIcon />} href="/users">
+          User
+        </MenuItem>
+        <MenuItem icon={<BookOpenIcon />} href="/classes">
+          Class
+        </MenuItem>
+        <MenuItem icon={<QueueListIcon />} href="/status">
+          Status
+        </MenuItem>
       </Menu>
     </Sidebar>
   );
