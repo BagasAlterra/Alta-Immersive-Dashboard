@@ -15,9 +15,7 @@ const RadioButton: FC<Props> = ({ id, checked, value, name, onChange }) => {
                 <label className='label'>
                     <input id={id} onChange={onChange} type="radio" name={name}
                         className={
-                            checked ?
-                                "radio radio-md checked:bg-alta-orange" :
-                                "radio radio-md checked:border border-alta-orange"
+                            "radio radio-md checked:" + (checked ? 'bg-alta-orange' : 'border border-alta-orange')
                         }
                         value={value}
                         checked={checked === true ? true : false}
