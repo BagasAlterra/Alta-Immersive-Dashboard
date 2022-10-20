@@ -11,6 +11,7 @@ import User from "pages/user";
 import Class from "pages/class";
 import Status from "pages/status";
 import Mentee from "pages/mentee";
+import Log from "pages/log"
 import NotFound from "pages/NotFound";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/classes" element={<Class />} />
         <Route path="/status" element={<Status />} />
         <Route path="/mentees" element={<Mentee />} />
+        <Route path="/log" element={<Log />} />
         <Route path="*" element={<NotFound />} />
       </>
     )
