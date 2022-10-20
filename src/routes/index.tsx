@@ -7,6 +7,7 @@ import {
 import { ProSidebarProvider } from "react-pro-sidebar";
 
 import Home from "pages";
+import Landing from "pages/landing"
 import User from "pages/user";
 import Class from "pages/class";
 import Status from "pages/status";
@@ -18,6 +19,7 @@ function App() {
     createRoutesFromElements(
       <>
         <Route path="/" element={<Home />} />
+        <Route path="/landing" element={<Landing />} />
         <Route path="/users" element={<User />} />
         <Route path="/classes" element={<Class />} />
         <Route path="/status" element={<Status />} />
