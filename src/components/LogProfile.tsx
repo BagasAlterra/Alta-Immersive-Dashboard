@@ -12,7 +12,7 @@ interface Props {
 
 const LogProfile: FC<Props> = ({ name, joined_class, major, graduate, phone, telegram, email }) => {
     return (
-        <div className="card w-full h-72 flex-row justify-between bg-white shadow">
+        <div className="card w-full justify-between bg-white shadow lg:h-72 md:h-72 sm:h-72 lg:flex-row md:flex-row sm:flex-row flex-column">
             <div className="m-7">
                 <h2 className="card-title font-inter font-semibold mb-2 text-black">{name}</h2>
                 <p className="font-inter font-thin mb-2 text-black">{joined_class}</p>

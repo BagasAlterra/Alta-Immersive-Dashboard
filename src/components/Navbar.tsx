@@ -31,10 +31,10 @@ const Navbar: FC<Props> = ({ subTitle }) => {
         </button>
       </div>
       <div className="flex-1 flex-col items-start px-4">
-        <p className="normal-case text-xl text-black font-bold">
+        <p className="normal-case text-xl text-black font-bold lg:flex md:flex sm:flex hidden">
           Immersive Dashboard
         </p>
-        <p className="normal-case text-sm text-black">{subTitle}</p>
+        <p className="text-sm text-black lg:normal-case md:normal-case sm:normal-case font-semibold">{subTitle}</p>
       </div>
       <div className="flex-none">
         <p className="normal-case text-base text-black">
