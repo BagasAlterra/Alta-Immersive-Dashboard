@@ -14,7 +14,7 @@ const Drawer = () => {
       style={{
         borderRight: "5px solid #243a63",
       }}
-      breakPoint="lg"
+      customBreakPoint="1024px"
     >
       <Menu
         renderMenuItemStyles={({ active }) => ({

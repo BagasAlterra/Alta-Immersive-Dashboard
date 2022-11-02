@@ -10,11 +10,11 @@ interface Props {
 
 const Layout: FC<Props> = ({ children, subTitle }) => {
   return (
-    <div className="w-full h-screen flex">
+    <div className="flex h-screen w-full">
       <Drawer />
-      <div className="w-full h-full flex flex-col">
+      <div className="flex h-full w-full flex-col overflow-auto">
         <Navbar subTitle={subTitle} />
-        <div className="w-full h-full overflow-auto bg-alta-background">
+        <div className="h-full w-full overflow-auto bg-alta-background p-9">
           {children}
         </div>
       </div>
