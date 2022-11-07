@@ -1,21 +1,28 @@
 import {
   HomeIcon,
   UsersIcon,
+  UserPlusIcon,
   BookOpenIcon,
+  UserGroupIcon,
   QueueListIcon,
   UserCircleIcon,
+  ChevronDoubleLeftIcon,
+  ChevronDoubleRightIcon,
 } from "@heroicons/react/24/outline";
-import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
+import {
+  Sidebar,
+  Menu,
+  MenuItem,
+  SubMenu,
+  useProSidebar,
+} from "react-pro-sidebar";
 
 const Drawer = () => {
+  const { collapseSidebar, collapsed } = useProSidebar();
+
   return (
-    <Sidebar
-      backgroundColor={"#152C59"}
-      style={{
-        borderRight: "5px solid #243a63",
-      }}
-      customBreakPoint="1024px"
-    >
+    <Sidebar backgroundColor={"#152C59"} customBreakPoint="1024px">
+      <img className="mx-auto" src="/ALTA-WHITE.png" alt="logo alta" />
       <Menu
         renderMenuItemStyles={({ active }) => ({
           ".menu-icon": {
@@ -33,12 +40,15 @@ const Drawer = () => {
           },
         })}
       >
+        <div className="divider my-0"></div>
         <MenuItem icon={<HomeIcon />} href="/">
           Dashboard
         </MenuItem>
         <SubMenu label="Mentee" icon={<UserCircleIcon />}>
-          <MenuItem href="/mentees">Mentee List</MenuItem>
-          <MenuItem>Add Mentee</MenuItem>
+          <MenuItem icon={<UserGroupIcon />} href="/mentees">
+            Mentee List
+          </MenuItem>
+          <MenuItem icon={<UserPlusIcon />}>Add Mentee</MenuItem>
         </SubMenu>
         <div className="divider my-0"></div>
         <MenuItem icon={<UsersIcon />} href="/users">
@@ -51,6 +61,23 @@ const Drawer = () => {
           Status
         </MenuItem>
       </Menu>
+      <div
+        className={`absolute bottom-0 flex w-full p-3 ${
+          collapsed ? "justify-center" : "justify-end"
+        }`}
+      >
+        {collapsed ? (
+          <ChevronDoubleRightIcon
+            className="h-6 w-6"
+            onClick={() => collapseSidebar()}
+          />
+        ) : (
+          <ChevronDoubleLeftIcon
+            className="h-6 w-6"
+            onClick={() => collapseSidebar()}
+          />
+        )}
+      </div>
     </Sidebar>
   );
 };
