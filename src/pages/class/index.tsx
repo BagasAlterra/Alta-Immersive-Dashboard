@@ -7,6 +7,8 @@ import Layout from "components/Layout";
 import Button from "components/Button";
 import Input from "components/Input";
 import Table from "components/Table";
+import Cards from "components/Cards";
+import Modal from "components/Modal";
 import { useTitle } from "utils/useTitle";
 import { makeData } from "utils/createData";
 
@@ -55,13 +57,31 @@ const Class: FC = () => {
 
   return (
     <Layout subTitle="Class List">
-      <Table
-        data={data}
-        columns={columns}
-        options={
-          <div className="flex items-center gap-2">
+      <Cards>
+        <label htmlFor="modal-add-class" className="btn">
+          open modal
+        </label>
+        <Table
+          data={data}
+          columns={columns}
+          options={
+            <div className="flex items-center gap-2">
+              <Input size="long" outline />
+              <Button type="short" title="Add New" fill />
+            </div>
+          }
+        />
+      </Cards>
+      <Modal
+        id="modal-add-class"
+        title="Add New Class"
+        content={
+          <div className="flex flex-col gap-3">
             <Input size="long" outline />
-            <Button type="short" title="Add New" fill />
+            <div className="flex justify-end">
+              <Button type="short" title="Cancel" />
+              <Button type="short" title="Save" fill />
+            </div>
           </div>
         }
       />
