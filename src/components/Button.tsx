@@ -1,38 +1,86 @@
-import React, { FC } from 'react'
+import { FC, ButtonHTMLAttributes, LabelHTMLAttributes } from "react";
+import { clsx } from "clsx";
 
-interface Props {
-    type: string,
-    fill?: boolean,
-    unfill?: boolean,
-    inactive?: boolean,
-    title: string,
-    onClick?: React.MouseEventHandler
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+  loading?: boolean;
+  variant?: string;
+  fill?: boolean;
+  label: string;
+  id: string;
 }
 
-const Button: FC<Props> = ({ type, fill, unfill, inactive, title, onClick }) => {
-    return (
-        <>
-            {
-                type === "short" ?
-                    <button className={
-                        fill ? "rounded-xl bg-alta-orange font-inter font-bold text-white text-xs h-10 w-20" :
-                            unfill ? "rounded-xl bg-white border border-alta-orange font-inter font-bold text-alta-orange text-xs h-10 w-20 " :
-                                inactive ? "rounded-xl bg-alta-border font-inter font-bold text-white text-xs h-10 w-20" : ""
-                    } onClick={onClick}>
-                        {title}
-                    </button>
-                    :
-                    <>
-                        {
-                            type === "long" &&
-                            <button className='rounded-xl bg-alta-orange font-inter font-bold text-white text-xs h-10 w-40' onClick={onClick}>
-                                {title}
-                            </button>
-                        }
-                    </>
-            }
-        </>
-    )
+interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
+  loading?: boolean;
+  variant?: string;
+  fill?: boolean;
+  label: string;
+  id: string;
+  htmlFor?: string;
 }
 
-export default Button
+const COLORS: any = {
+  primary:
+    "bg-alta-orange hover:bg-alta-orange/90 hover:border-alta-orange text-white border-white",
+  secondary:
+    "bg-slate-50 hover:bg-slate-100 hover:border-alta-orange text-alta-orange border-alta-orange",
+};
+
+const Button: FC<Props> = ({
+  variant = "primary",
+  type = "button",
+  onClick,
+  loading,
+  label,
+  fill,
+  id,
+  ...props
+}) => {
+  return (
+    <button
+      id={id}
+      className={clsx(
+        "btn rounded-xl",
+        loading && "cursor-not-allowed",
+        fill && "w-full",
+        COLORS[variant]
+      )}
+      onClick={onClick}
+      disabled={loading}
+      type={type}
+      {...props}
+    >
+      {label}
+    </button>
+  );
+};
+
+const ButtonLabel: FC<LabelProps> = ({
+  variant = "primary",
+  onClick,
+  loading,
+  htmlFor,
+  label,
+  fill,
+  id,
+  ...props
+}) => {
+  return (
+    <label
+      htmlFor={htmlFor}
+      id={id}
+      className={clsx(
+        "btn rounded-xl",
+        loading && "cursor-not-allowed",
+        fill && "w-full",
+        COLORS[variant]
+      )}
+      onClick={onClick}
+      {...props}
+    >
+      {label}
+    </label>
+  );
+};
+
+export default Button;
+export { Button, ButtonLabel };

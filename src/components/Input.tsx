@@ -1,47 +1,43 @@
-import React, { ChangeEventHandler, FC } from 'react'
+import { FC, InputHTMLAttributes } from "react";
+import { clsx } from "clsx";
 
-interface Props {
-    size: string,
-    outline: boolean,
-    id?: string,
-    type?: string,
-    placeholder?: string,
-    value?: string,
-    name?: string,
-    onChange?: ChangeEventHandler
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
+  name: string;
+  id: string;
+  register?: any;
+  error?: string;
+  label?: string;
 }
 
-const Input: FC<Props> = ({ size, value, outline, type, name, id, placeholder, onChange }) => {
-    return (
-        <>
-            <input
-                id={id}
-                className={
-                    outline === true ?
-                        `  <>
-                            ${size === "long" ? "bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded input-md w-5/6 pl-2" :
-                            size === "medium" ? "bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded input-md w-1/3 pl-2" :
-                                size === "short" ? "bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded input-md w-1/5 pl-2" :
-                                    size === "xtra-short" && "bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded input-md w-1/6 pl-2"
-                        }
-                           </>`
-                        :
-                        `  <>
-                        ${size === "long" ? "bg-gray-50  text-gray-900 text-sm rounded input-md w-5/6 pl-2" :
-                            size === "medium" ? "bg-gray-50  text-gray-900 text-sm rounded input-md w-1/3 pl-2" :
-                                size === "short" ? "bg-gray-50  text-gray-900 text-sm rounded input-md w-1/5 pl-2" :
-                                    size === "xtra-short" && "bg-gray-50  text-gray-900 text-sm rounded input-md w-1/6 pl-2"
-                        }
-                           </>`
-                }
-                placeholder={placeholder}
-                type={type}
-                value={value}
-                name={name}
-                onChange={onChange}
-            ></input>
-        </>
-    )
-}
+const Input: FC<Props> = ({
+  placeholder,
+  register,
+  onChange,
+  disabled,
+  label,
+  value,
+  error,
+  name,
+  type,
+  id,
+  ...props
+}) => {
+  return (
+    <input
+      className={clsx(
+        "input input-bordered w-full bg-gray-50 p-2 text-black shadow-md focus:border-alta-space-cadet focus:outline-none focus:ring-1 focus:ring-alta-space-cadet disabled:bg-slate-200",
+        error && "border-red-500"
+      )}
+      id={id}
+      type={type}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+      disabled={disabled}
+      {...(register ? register(name) : {})}
+      {...props}
+    />
+  );
+};
 
-export default Input
+export default Input;
