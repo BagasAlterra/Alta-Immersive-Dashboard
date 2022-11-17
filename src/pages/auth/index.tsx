@@ -1,18 +1,19 @@
+import withReactContent from "sweetalert2-react-content";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 
+import Swal from "utils/Swal";
 import Button from "components/Button";
 
-const THREEHOURINMS = 10800000;
+const THREE_HOUR_IN_MS = 10800000;
 
 const Auth = () => {
+  const MySwal = withReactContent(Swal);
   const [, setCookie] = useCookies();
   const navigate = useNavigate();
-  const image =
-    "https://academy.alterra.id/wp-content/uploads/2022/06/Logo-Colour-Transparant-1.png";
-  const title =
+  const content =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ipsum consequat nisl vel pretium lectus quam id leo in. Fringilla urna porttitor rhoncus dolor purus non. Consequat nisl vel pretium lectus quam id leo in vitae.";
 
   const loginGoogle = useGoogleLogin({
@@ -20,7 +21,11 @@ const Auth = () => {
       handleAuth(tokenResponse);
     },
     onError: (response) => {
-      console.log(response); // TODO: change to alert
+      MySwal.fire({
+        title: "Failed",
+        text: response.toString(),
+        showCancelButton: false,
+      });
     },
   });
 
@@ -32,29 +37,43 @@ const Auth = () => {
       .post("oauth/login", body)
       .then((res) => {
         const { data, message } = res.data;
-        console.log(message); // TODO: change to alert
+        MySwal.fire({
+          title: "Success",
+          text: message,
+          showCancelButton: false,
+        });
         setCookie("token", data.token, {
           path: "/",
-          expires: new Date(Date.now() + THREEHOURINMS),
+          expires: new Date(Date.now() + THREE_HOUR_IN_MS),
         });
         navigate("/home");
       })
       .catch((err) => {
-        console.log(err); // TODO: change to alert
+        MySwal.fire({
+          title: "Success",
+          text: err.toString(),
+          showCancelButton: false,
+        });
       });
   };
 
   return (
     <div className="flex h-screen w-full overflow-auto">
-      <div className="hidden h-full w-1/2 items-center bg-alta-background md:flex">
+      <div className="hidden h-full w-1/2 items-center bg-white md:flex">
         <img
-          className="md:mx-20 md:h-1/6 md:w-1/2 lg:mx-20 lg:h-1/5 lg:w-1/3 xl:mx-40"
-          src={image}
-          alt="logo alta"
+          className="aspect-auto"
+          src="/illustration.jpg"
+          alt="Designed by stories / Freepik"
         />
       </div>
       <div className="flex h-full w-full flex-col items-center justify-center gap-6 bg-alta-space-cadet p-9 md:w-1/2">
-        <p className="text-justify font-inter text-white">{title}</p>
+        <img
+          className="absolute top-3 right-3 w-32 object-contain"
+          src="ALTA-WHITE.png"
+          alt="Logo Alta"
+        />
+        <p className="text-justify font-inter text-white">{content}</p>
+        {/* TODO: Need to change the message */}
         <Button id="button-yes" label="Login" onClick={() => loginGoogle()} />
       </div>
     </div>
