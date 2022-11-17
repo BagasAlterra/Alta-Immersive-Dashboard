@@ -13,8 +13,6 @@ const Auth = () => {
   const MySwal = withReactContent(Swal);
   const [, setCookie] = useCookies();
   const navigate = useNavigate();
-  const content =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ipsum consequat nisl vel pretium lectus quam id leo in. Fringilla urna porttitor rhoncus dolor purus non. Consequat nisl vel pretium lectus quam id leo in vitae.";
 
   const loginGoogle = useGoogleLogin({
     onSuccess: (tokenResponse) => {
@@ -66,15 +64,21 @@ const Auth = () => {
           alt="Designed by stories / Freepik"
         />
       </div>
-      <div className="flex h-full w-full flex-col items-center justify-center gap-6 bg-alta-space-cadet p-9 md:w-1/2">
+      <div className="flex h-full w-full flex-col justify-center gap-6 bg-alta-space-cadet p-9 md:w-1/2">
         <img
           className="absolute top-3 right-3 w-32 object-contain"
           src="ALTA-WHITE.png"
           alt="Logo Alta"
         />
-        <p className="text-justify font-inter text-white">{content}</p>
-        {/* TODO: Need to change the message */}
-        <Button id="button-yes" label="Login" onClick={() => loginGoogle()} />
+        <h1 className="font-inter text-2xl font-bold text-white md:text-3xl lg:text-4xl">
+          Immersive Dashboard
+        </h1>
+        <p className="text-justify font-inter text-white">
+          Immersive Dashboard is here as a means to simplify the work of the
+          Immersive Program team in terms of monitoring and status of mentees in
+          order to create the best tech talent in their field.
+        </p>
+        <Button id="button-login" label="Login" onClick={() => loginGoogle()} />
       </div>
     </div>
   );
