@@ -1,5 +1,4 @@
-import { FC, useState } from 'react'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
 import Layout from 'components/Layout'
 import Input from 'components/Input'
@@ -7,13 +6,30 @@ import Dropdown from 'components/Dropdown'
 import RadioButton from 'components/RadioButton'
 import Button from 'components/Button'
 
+
 const addMentee = () => {
 
     const { register, handleSubmit } = useForm()
+    const dummy = [
+        {
+            value: "Saudara Kandung"
+        },
+        {
+            value: "Orang Tua"
+        },
+        {
+            value: "Kakek / Nenek"
+        },
+        {
+            value: "Keluarga dari Orang Tua"
+        }
+    ]
 
     const onSubmit = (data: any) => {
         alert(JSON.stringify(data))
     }
+
+
 
     return (
         <Layout subTitle="Add New">
@@ -29,13 +45,10 @@ const addMentee = () => {
                         <p className='my-3 text-black'>Home Address</p>
                         <Input label='Home Address' id={'home_address'} name={'home_address'} register={register} required
                         />
-                        <div className='my-3 flex'>
+                        <div className='my-5 flex'>
                             <p className='text-black mt-2'>Gender</p>
                             <div className='ml-20'>
-                                <RadioButton name='Male' />
-                            </div>
-                            <div className='ml-20'>
-                                <RadioButton name='Female' />
+                                <RadioButton option_1='Female' option_2='Male' value_1='Female' value_2='Male' id='gender' name='gender' register={register} />
                             </div>
                         </div>
                         <p className='my-3 text-black'>Email</p>
@@ -57,17 +70,14 @@ const addMentee = () => {
                         <Input label='Emergency Phone' id={'emergency_phone'} name={'emergency_phone'} register={register} required
                         />
                         <p className='my-3 text-black'>Status</p>
-                        <Dropdown title='status' />
+                        <Dropdown name='status' title='status' data={dummy} register={register} />
                     </div>
                     <div className='p-5'>
                         <p className='text-black text-lg font-bold'>Education Data</p>
-                        <div className='my-3 flex'>
+                        <div className='my-5 flex'>
                             <p className='text-black mt-2'>Type</p>
-                            <div className='ml-20'>
-                                <RadioButton name='Informatic' />
-                            </div>
-                            <div className='ml-20'>
-                                <RadioButton name='Non-informatic' />
+                            <div className='ml-24'>
+                                <RadioButton option_1='Non-Informatic' option_2='Informatic' value_1='Non-Informatic' value_2='Informatic' id='type' name='type' register={register} />
                             </div>
                         </div>
                         <p className='my-3 text-black'>Major</p>
