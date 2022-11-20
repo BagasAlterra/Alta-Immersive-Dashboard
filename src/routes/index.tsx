@@ -5,22 +5,26 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import { ProSidebarProvider } from "react-pro-sidebar";
+import axios from "axios";
 
 import Home from "pages";
-import Landing from "pages/landing"
+import Auth from "pages/auth";
 import User from "pages/user";
 import Class from "pages/class";
 import Status from "pages/status";
 import Mentee from "pages/mentee";
-import Log from "pages/log"
+import Log from "pages/log";
 import NotFound from "pages/NotFound";
 
-function App() {
+axios.defaults.baseURL =
+  "https://virtserver.swaggerhub.com/JerryBE1709/SysAsses/1.0.0/";
+
+const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route path="/" element={<Home />} />
-        <Route path="/landing" element={<Landing />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Auth />} />
         <Route path="/users" element={<User />} />
         <Route path="/classes" element={<Class />} />
         <Route path="/status" element={<Status />} />
@@ -36,6 +40,6 @@ function App() {
       <RouterProvider router={router} />
     </ProSidebarProvider>
   );
-}
+};
 
 export default App;
