@@ -1,17 +1,21 @@
 import { TrashIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 import { createColumnHelper } from "@tanstack/react-table";
+import withReactContent from "sweetalert2-react-content";
 import { Link } from "react-router-dom";
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 
 import Layout from "components/Layout";
 import Input from "components/Input";
 import Table from "components/Table";
 import { useTitle } from "utils/useTitle";
-import { makeData } from "utils/createData";
+import Swal from "utils/Swal";
+
+import api from "services/api";
 
 const User: FC = () => {
   const columnHelper = createColumnHelper<any>();
-  const [data] = useState(() => makeData(10));
+  const MySwal = withReactContent(Swal);
+  const [user, setUser] = useState([])
   const columns = [
     columnHelper.accessor("id", {
       header: () => "No",
@@ -76,12 +80,30 @@ const User: FC = () => {
   ];
   useTitle("User List | Immersive Dashboard");
 
+  const getUsers = async () => {
+    await api.all_users()
+      .then((response) => {
+        setUser(response.data.data)
+      })
+      .catch((error) => {
+        MySwal.fire({
+          title: "Error",
+          text: error.toString(),
+          showCancelButton: false,
+        });
+      })
+  }
+
+  useEffect(() => {
+    getUsers()
+  }, [])
+
   return (
     <Layout subTitle="User List">
       <Table
-        data={data}
+        data={user}
         columns={columns}
-        options={<Input size="long" outline />}
+        options={<Input name="user_table" id="user_table" />}
       />
     </Layout>
   );
