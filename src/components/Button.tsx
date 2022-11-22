@@ -20,7 +20,7 @@ interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
 
 const COLORS: any = {
   primary:
-    "bg-alta-orange hover:bg-alta-orange/90 hover:border-alta-orange text-white border-white",
+    "bg-alta-orange hover:bg-alta-orange/90 hover:border-alta-orange text-white",
   secondary:
     "bg-slate-50 hover:bg-slate-100 hover:border-alta-orange text-alta-orange border-alta-orange",
 };

@@ -41,7 +41,7 @@ const Drawer = () => {
         })}
       >
         <div className="divider my-0"></div>
-        <MenuItem icon={<HomeIcon />} href="/">
+        <MenuItem icon={<HomeIcon />} href="/home">
           Dashboard
         </MenuItem>
         <SubMenu label="Mentee" icon={<UserCircleIcon />}>
