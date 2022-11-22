@@ -37,6 +37,7 @@ const Button: FC<Props> = ({
 }) => {
   return (
     <button
+      data-theme="light"
       id={id}
       className={clsx(
         "btn rounded-xl",

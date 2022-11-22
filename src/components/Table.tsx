@@ -8,14 +8,29 @@ import {
   flexRender,
 } from "@tanstack/react-table";
 
+import { Button } from "components/Button";
+
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   columns: ColumnDef<any>[];
   options?: ReactNode;
   page?: number;
   data?: any[];
+  onClickPrev?: () => void;
+  onClickNext?: () => void;
+  disabledPrev?: boolean;
+  disabledNext?: boolean;
 }
 
-const Table: FC<Props> = ({ data = [], columns, page = 0, options }) => {
+const Table: FC<Props> = ({
+  data = [],
+  columns,
+  page = 1,
+  options,
+  onClickPrev,
+  onClickNext,
+  disabledPrev,
+  disabledNext,
+}) => {
   const table = useReactTable({
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -35,6 +50,7 @@ const Table: FC<Props> = ({ data = [], columns, page = 0, options }) => {
                 {headerGroup.headers.map((header) => {
                   return (
                     <th
+                      className="!relative !z-0"
                       {...{
                         key: header.id,
                         colSpan: header.colSpan,
@@ -65,6 +81,7 @@ const Table: FC<Props> = ({ data = [], columns, page = 0, options }) => {
                     if (cell.column.id === "id") {
                       return (
                         <th
+                          className="!relative !z-0"
                           {...{
                             key: cell.id,
                             style: {
@@ -103,16 +120,21 @@ const Table: FC<Props> = ({ data = [], columns, page = 0, options }) => {
         </table>
       </div>
       <div className="btn-group">
-        {/* TODO: Add function for pagination */}
-        <button className="btn btn-outline border-alta-orange text-alta-orange">
-          «
-        </button>
-        <button className="btn btn-outline border-alta-orange text-alta-orange">
-          Page {`${page}`}
-        </button>
-        <button className="btn btn-outline border-alta-orange text-alta-orange">
-          »
-        </button>
+        <Button
+          id="button-prev"
+          variant="secondary"
+          label="«"
+          onClick={onClickPrev}
+          loading={disabledPrev}
+        />
+        <Button id="button-page" variant="secondary" label={`Page ${page}`} />
+        <Button
+          id="button-next"
+          variant="secondary"
+          label="»"
+          onClick={onClickNext}
+          loading={disabledNext}
+        />
       </div>
     </div>
   );
