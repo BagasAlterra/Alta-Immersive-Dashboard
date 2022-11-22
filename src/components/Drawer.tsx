@@ -48,7 +48,7 @@ const Drawer = () => {
           <MenuItem icon={<UserGroupIcon />} href="/mentees">
             Mentee List
           </MenuItem>
-          <MenuItem icon={<UserPlusIcon />}>Add Mentee</MenuItem>
+          <MenuItem icon={<UserPlusIcon />} href="/add_mentee">Add Mentee</MenuItem>
         </SubMenu>
         <div className="divider my-0"></div>
         <MenuItem icon={<UsersIcon />} href="/users">
@@ -62,9 +62,8 @@ const Drawer = () => {
         </MenuItem>
       </Menu>
       <div
-        className={`absolute bottom-0 flex w-full p-3 ${
-          collapsed ? "justify-center" : "justify-end"
-        }`}
+        className={`absolute bottom-0 flex w-full p-3 ${collapsed ? "justify-center" : "justify-end"
+          }`}
       >
         {collapsed ? (
           <ChevronDoubleRightIcon
