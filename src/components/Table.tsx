@@ -1,14 +1,15 @@
-import { FC, ButtonHTMLAttributes, ReactNode } from "react";
+import { FC, ButtonHTMLAttributes, ReactNode } from 'react';
 import {
+  ColumnDef,
+  flexRender,
   useReactTable,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
-  ColumnDef,
-  flexRender,
-} from "@tanstack/react-table";
+} from '@tanstack/react-table';
+import { clsx } from 'clsx';
 
-import { Button } from "components/Button";
+import { Button } from 'components/Button';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   columns: ColumnDef<any>[];
@@ -19,6 +20,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   onClickNext?: () => void;
   disabledPrev?: boolean;
   disabledNext?: boolean;
+  isLoading?: boolean;
 }
 
 const Table: FC<Props> = ({
@@ -30,6 +32,7 @@ const Table: FC<Props> = ({
   onClickNext,
   disabledPrev,
   disabledNext,
+  isLoading,
 }) => {
   const table = useReactTable({
     getPaginationRowModel: getPaginationRowModel(),
@@ -73,52 +76,61 @@ const Table: FC<Props> = ({
               </tr>
             ))}
           </thead>
-          <tbody>
-            {table.getRowModel().rows.map((row) => {
-              return (
-                <tr key={row.id} className="hover">
-                  {row.getVisibleCells().map((cell) => {
-                    if (cell.column.id === "id") {
-                      return (
-                        <th
-                          className="!relative !z-0"
-                          {...{
-                            key: cell.id,
-                            style: {
-                              width: cell.column.getSize(),
-                            },
-                          }}
-                        >
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )}
-                        </th>
-                      );
-                    } else {
-                      return (
-                        <td
-                          {...{
-                            key: cell.id,
-                            style: {
-                              width: cell.column.getSize(),
-                            },
-                          }}
-                        >
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )}
-                        </td>
-                      );
-                    }
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
+          {!isLoading && (
+            <tbody>
+              {table.getRowModel().rows.map((row) => {
+                return (
+                  <tr key={row.id} className="hover">
+                    {row.getVisibleCells().map((cell) => {
+                      if (cell.column.id === 'id') {
+                        return (
+                          <th
+                            className="!relative !z-0"
+                            {...{
+                              key: cell.id,
+                              style: {
+                                width: cell.column.getSize(),
+                              },
+                            }}
+                          >
+                            {flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )}
+                          </th>
+                        );
+                      } else {
+                        return (
+                          <td
+                            {...{
+                              key: cell.id,
+                              style: {
+                                width: cell.column.getSize(),
+                              },
+                            }}
+                          >
+                            {flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )}
+                          </td>
+                        );
+                      }
+                    })}
+                  </tr>
+                );
+              })}
+            </tbody>
+          )}
         </table>
       </div>
+      {isLoading && (
+        <div className="flex w-full flex-col items-center">
+          <div className="m-3 flex h-11 w-11 animate-spin items-center justify-center rounded-full bg-gradient-to-tr from-white to-alta-space-cadet">
+            <div className="h-9 w-9 rounded-full bg-white"></div>
+          </div>
+        </div>
+      )}
       <div className="btn-group">
         <Button
           id="button-prev"
