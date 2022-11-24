@@ -44,13 +44,12 @@ const RadioButton: FC<Props> = ({
               {...props}
               className="radio mr-2 checked:bg-alta-orange"
               type="radio"
-              id={index}
+              id={`${name}-${index}`}
               name={name}
               value={optionValue}
               disabled={disabled}
-              checked={value ? optionValue === value : true}
             />
-            <span className="label-text">{optionLabel}</span>
+            <span className="label-text text-black">{optionLabel}</span>
           </label>
         ))}
       </div>

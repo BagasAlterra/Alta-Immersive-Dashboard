@@ -138,10 +138,10 @@ const EditMentee: FC = () => {
           <LoadingSpinner />
         ) : (
           <form
-            className="flex flex-col gap-3"
+            className="flex flex-col gap-3 p-5"
             onSubmit={handleSubmit(onSubmitHandler)}
           >
-            <section className="flex flex-col px-5">
+            <section className="flex flex-col">
               <Input
                 register={register}
                 id="input-full_name"
@@ -213,7 +213,7 @@ const EditMentee: FC = () => {
                 type="tel"
               />
             </section>
-            <section className="flex flex-col px-5">
+            <section className="flex flex-col">
               <p className="text-lg font-bold text-black">Emergency</p>
               <Input
                 register={register}
@@ -241,7 +241,7 @@ const EditMentee: FC = () => {
                 data={itemStatus}
               />
             </section>
-            <section className="flex flex-col px-5">
+            <section className="flex flex-col">
               <p className="text-lg font-bold text-black">Education Data</p>
               <RadioButton
                 register={register}

@@ -2,12 +2,12 @@ import { FC, InputHTMLAttributes } from 'react';
 import { clsx } from 'clsx';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
+  placeholder: string;
   name: string;
   id: string;
   data?: any[];
   register?: any;
   error?: string;
-  placeholder: string;
   showLabel?: boolean;
 }
 
@@ -44,21 +44,15 @@ const Dropdown: FC<Props> = ({
         {...(register ? register(name) : {})}
         {...props}
       >
-        <option disabled selected>
-          {placeholder}
-        </option>
+        <option disabled>{placeholder}</option>
         {data ? (
           data.map(({ label: optionLabel, value: optionValue }) => (
-            <option
-              key={optionLabel}
-              value={optionLabel}
-              selected={value ? optionValue === value : true}
-            >
+            <option key={optionValue} value={optionValue}>
               {optionLabel}
             </option>
           ))
         ) : (
-          <option selected>No data available</option>
+          <option>No data available</option>
         )}
       </select>
       {error && (
