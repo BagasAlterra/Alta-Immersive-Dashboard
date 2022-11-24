@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useQuery } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { FC, useState } from 'react';
+import moment from 'moment';
 import * as yup from 'yup';
 import axios from 'axios';
 
@@ -16,7 +17,6 @@ import Cards from 'components/Cards';
 import Modal from 'components/Modal';
 import { useTitle } from 'utils/useTitle';
 import Swal from 'utils/Swal';
-import moment from 'moment';
 
 interface Inputs {
   name: string;
@@ -154,6 +154,7 @@ const Class: FC = () => {
           text: message,
           showCancelButton: false,
         });
+        refetch();
         setModalAdd(false);
       })
       .catch((err) => {
@@ -166,7 +167,6 @@ const Class: FC = () => {
       })
       .finally(() => {
         setLoadingProcess(false);
-        refetch();
       });
   };
 
@@ -181,6 +181,7 @@ const Class: FC = () => {
           text: message,
           showCancelButton: false,
         });
+        refetch();
         setModalEdit(false);
       })
       .catch((err) => {
@@ -193,7 +194,6 @@ const Class: FC = () => {
       })
       .finally(() => {
         setLoadingProcess(false);
-        refetch();
       });
   };
 
@@ -208,6 +208,7 @@ const Class: FC = () => {
           text: message,
           showCancelButton: false,
         });
+        refetch();
         setModalDelete(false);
       })
       .catch((err) => {

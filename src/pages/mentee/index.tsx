@@ -1,8 +1,8 @@
 import { TrashIcon, PencilSquareIcon } from '@heroicons/react/24/outline';
 import { createColumnHelper } from '@tanstack/react-table';
 import withReactContent from 'sweetalert2-react-content';
+import { Link, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { Link } from 'react-router-dom';
 import { FC, useState } from 'react';
 import axios from 'axios';
 
@@ -19,6 +19,7 @@ import Swal from 'utils/Swal';
 const columnHelper = createColumnHelper<any>();
 
 const Mentee: FC = () => {
+  const navigate = useNavigate();
   const MySwal = withReactContent(Swal);
   useTitle('Mentee List | Immersive Dashboard');
   const [loadingProcess, setLoadingProcess] = useState(false);
@@ -47,7 +48,11 @@ const Mentee: FC = () => {
     }),
     columnHelper.accessor('full_name', {
       header: () => 'Full Name',
-      cell: (info) => info.getValue(),
+      cell: (info) => (
+        <Link to={`/mentees/${info.row.original.id}`}>
+          <p>{info.getValue()}</p>
+        </Link>
+      ),
       footer: (info) => info.column.id,
       size: Math.round((window.innerWidth - 55) * 0.2),
     }),
@@ -85,7 +90,7 @@ const Mentee: FC = () => {
       header: '',
       cell: (info) => (
         <div className="flex justify-center">
-          <Link to={`#`}>
+          <Link to={`/mentees/${info.row.original.id}/edit`}>
             <PencilSquareIcon className="h-6 w-6" />
           </Link>
         </div>
@@ -123,6 +128,7 @@ const Mentee: FC = () => {
           showCancelButton: false,
         });
         setModalDelete(false);
+        refetch();
       })
       .catch((err) => {
         const { data, status } = err.response;
@@ -158,8 +164,11 @@ const Mentee: FC = () => {
               <div className="flex gap-2">
                 {/* TODO: Add functionality for export data */}
                 <Button id="button-export" label="Export" variant="secondary" />
-                {/* TODO: Navigate to add new mentee */}
-                <Button id="button-add-new" label="Add New" />
+                <Button
+                  id="button-add-new"
+                  label="Add New"
+                  onClick={() => navigate('/add-mentee')}
+                />
               </div>
               <div className="grid w-full grid-cols-2 gap-2 lg:grid-cols-4">
                 <Input id="input-search" name="search" placeholder="Search" />
