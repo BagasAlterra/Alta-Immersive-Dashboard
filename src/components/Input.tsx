@@ -1,5 +1,5 @@
-import { FC, InputHTMLAttributes } from "react";
-import { clsx } from "clsx";
+import { FC, InputHTMLAttributes } from 'react';
+import { clsx } from 'clsx';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -23,20 +23,23 @@ const Input: FC<Props> = ({
   ...props
 }) => {
   return (
-    <input
-      className={clsx(
-        "input input-bordered w-full bg-gray-50 p-2 text-black shadow-md focus:border-alta-space-cadet focus:outline-none focus:ring-1 focus:ring-alta-space-cadet disabled:bg-slate-200",
-        error && "border-red-500"
-      )}
-      id={id}
-      type={type}
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-      disabled={disabled}
-      {...(register ? register(name) : {})}
-      {...props}
-    />
+    <div className="w-full">
+      <input
+        className={clsx(
+          'input input-bordered w-full bg-gray-50 p-2 text-black shadow-md focus:border-alta-space-cadet focus:outline-none focus:ring-1 focus:ring-alta-space-cadet disabled:bg-slate-200',
+          error && 'border-red-500'
+        )}
+        id={id}
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        disabled={disabled}
+        {...(register ? register(name) : {})}
+        {...props}
+      />
+      <p className="text-neutral-500 break-words text-sm font-light">{error}</p>
+    </div>
   );
 };
 
