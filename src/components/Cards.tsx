@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react";
+import { FC, ReactNode } from 'react';
 
 interface Props {
   children: ReactNode;
@@ -6,10 +6,12 @@ interface Props {
 }
 
 const Cards: FC<Props> = ({ children, className }) => {
-  const cls: string = className ? className : "";
+  const cls: string = className ? className : '';
 
   return (
-    <div className={`mb-3 rounded-xl border bg-white p-2 shadow-lg ${cls}`}>
+    <div
+      className={`relative mb-3 rounded-xl border bg-white p-2 shadow-lg ${cls}`}
+    >
       {children}
     </div>
   );
