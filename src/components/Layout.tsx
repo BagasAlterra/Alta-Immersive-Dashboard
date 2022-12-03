@@ -1,7 +1,7 @@
 import { FC, ReactNode } from 'react';
 import { clsx } from 'clsx';
 
-import Drawer from 'components/Drawer';
+import Sidebar from 'components/Sidebar';
 import Navbar from 'components/Navbar';
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 const Layout: FC<Props> = ({ children, subTitle, isFull }) => {
   return (
     <div className="flex h-screen w-full">
-      <Drawer />
+      <Sidebar />
       <div className="flex h-full w-full flex-col overflow-auto">
         <Navbar subTitle={subTitle} />
         <div

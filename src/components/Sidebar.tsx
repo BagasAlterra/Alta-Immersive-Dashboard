@@ -8,47 +8,56 @@ import {
   UserCircleIcon,
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
-} from "@heroicons/react/24/outline";
+} from '@heroicons/react/24/outline';
 import {
   Sidebar,
   Menu,
   MenuItem,
   SubMenu,
   useProSidebar,
-} from "react-pro-sidebar";
+  menuClasses,
+} from 'react-pro-sidebar';
+import { useLocation } from 'react-router-dom';
 
 const Drawer = () => {
   const { collapseSidebar, collapsed } = useProSidebar();
+  const { pathname } = useLocation();
 
   return (
-    <Sidebar backgroundColor={"#152C59"} customBreakPoint="1024px">
-      <img className="mx-auto" src="/ALTA-WHITE.png" alt="logo alta" />
+    <Sidebar backgroundColor={'#152C59'} customBreakPoint="1024px">
+      <img className="mx-auto p-2" src="/ALTA-WHITE.png" alt="logo alta" />
       <Menu
-        renderMenuItemStyles={({ active }) => ({
-          ".menu-icon": {
-            width: "1.5rem",
-            minWidth: "1.5rem",
-            height: "1.5rem",
+        rootStyles={{
+          [`.${menuClasses.icon}`]: {
+            width: '1.5rem',
+            minWidth: '1.5rem',
+            height: '1.5rem',
+            marginRight: '1.5rem',
           },
-          ".menu-anchor": {
-            backgroundColor: active ? "#313741" : "initial",
-            color: "#FFF",
+          [`.${menuClasses.button}`]: {
+            color: '#fff',
+            backgroundColor: '#152C58',
+            '&:hover': {
+              backgroundColor: '#2a3d61',
+            },
           },
-          ".sub-menu-content": {
-            backgroundColor: "#152C59",
-            padding: "0px",
-          },
-        })}
+        }}
       >
         <div className="divider my-0"></div>
         <MenuItem icon={<HomeIcon />} href="/home">
           Dashboard
         </MenuItem>
-        <SubMenu label="Mentee" icon={<UserCircleIcon />}>
+        <SubMenu
+          open={pathname.includes('mentee')}
+          label="Mentee"
+          icon={<UserCircleIcon />}
+        >
           <MenuItem icon={<UserGroupIcon />} href="/mentees">
             Mentee List
           </MenuItem>
-          <MenuItem icon={<UserPlusIcon />} href="/add_mentee">Add Mentee</MenuItem>
+          <MenuItem icon={<UserPlusIcon />} href="/add_mentee">
+            Add Mentee
+          </MenuItem>
         </SubMenu>
         <div className="divider my-0"></div>
         <MenuItem icon={<UsersIcon />} href="/users">
@@ -62,8 +71,9 @@ const Drawer = () => {
         </MenuItem>
       </Menu>
       <div
-        className={`absolute bottom-0 flex w-full p-3 ${collapsed ? "justify-center" : "justify-end"
-          }`}
+        className={`absolute bottom-0 flex w-full p-3 ${
+          collapsed ? 'justify-center' : 'justify-end'
+        }`}
       >
         {collapsed ? (
           <ChevronDoubleRightIcon

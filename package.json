@@ -29,7 +29,7 @@
     "react-dom": "^18.2.0",
     "react-google-login": "^5.2.2",
     "react-hook-form": "^7.37.0",
-    "react-pro-sidebar": "^1.0.0-alpha.4",
+    "react-pro-sidebar": "^1.0.0-alpha.9",
     "react-router-dom": "^6.4.2",
     "reactflow": "^11.3.1",
     "sweetalert2": "^11.6.8",
