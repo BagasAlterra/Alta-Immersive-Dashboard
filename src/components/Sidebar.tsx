@@ -24,49 +24,82 @@ const Drawer = () => {
   const { pathname } = useLocation();
 
   return (
-    <Sidebar backgroundColor={'#152C59'} customBreakPoint="1024px">
+    <Sidebar backgroundColor="#152C59" customBreakPoint="1024px">
       <img className="mx-auto p-2" src="/ALTA-WHITE.png" alt="logo alta" />
       <Menu
         rootStyles={{
-          [`.${menuClasses.icon}`]: {
-            width: '1.5rem',
-            minWidth: '1.5rem',
-            height: '1.5rem',
-            marginRight: '1.5rem',
-          },
           [`.${menuClasses.button}`]: {
-            color: '#fff',
-            backgroundColor: '#152C58',
             '&:hover': {
               backgroundColor: '#2a3d61',
+              color: '#EF6236',
             },
+          },
+        }}
+        menuItemStyles={{
+          icon: () => {
+            return {
+              width: '1.5rem',
+              minWidth: '1.5rem',
+              height: '1.5rem',
+              marginRight: '1.5rem',
+            };
+          },
+          button: ({ active, disabled }) => {
+            return {
+              color: disabled ? '#666' : active ? '#EF6236' : '#fff',
+              backgroundColor: active ? '#2a3d61' : '#152C59',
+            };
           },
         }}
       >
         <div className="divider my-0"></div>
-        <MenuItem icon={<HomeIcon />} href="/home">
+        <MenuItem
+          active={pathname.includes('/home')}
+          icon={<HomeIcon />}
+          href="/home"
+        >
           Dashboard
         </MenuItem>
         <SubMenu
-          open={pathname.includes('mentee')}
+          defaultOpen={pathname.includes('mentee')}
           label="Mentee"
           icon={<UserCircleIcon />}
         >
-          <MenuItem icon={<UserGroupIcon />} href="/mentees">
+          <MenuItem
+            active={pathname.includes('/mentees')}
+            icon={<UserGroupIcon />}
+            href="/mentees"
+          >
             Mentee List
           </MenuItem>
-          <MenuItem icon={<UserPlusIcon />} href="/add_mentee">
+          <MenuItem
+            active={pathname.includes('/add-mentee')}
+            icon={<UserPlusIcon />}
+            href="/add-mentee"
+          >
             Add Mentee
           </MenuItem>
         </SubMenu>
         <div className="divider my-0"></div>
-        <MenuItem icon={<UsersIcon />} href="/users">
+        <MenuItem
+          active={pathname.includes('/users')}
+          icon={<UsersIcon />}
+          href="/users"
+        >
           User
         </MenuItem>
-        <MenuItem icon={<BookOpenIcon />} href="/classes">
+        <MenuItem
+          active={pathname.includes('/classes')}
+          icon={<BookOpenIcon />}
+          href="/classes"
+        >
           Class
         </MenuItem>
-        <MenuItem icon={<QueueListIcon />} href="/status">
+        <MenuItem
+          active={pathname.includes('/status')}
+          icon={<QueueListIcon />}
+          href="/status"
+        >
           Status
         </MenuItem>
       </Menu>
