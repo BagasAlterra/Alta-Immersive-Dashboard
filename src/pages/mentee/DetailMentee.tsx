@@ -1,12 +1,13 @@
 import withReactContent from 'sweetalert2-react-content';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useQuery } from '@tanstack/react-query';
+import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useNavigate, useParams } from 'react-router-dom';
 import { FC, useState } from 'react';
 import * as yup from 'yup';
 import axios from 'axios';
 
+import LoadingSpinner from 'components/LoadingSpinner';
 import LogSection from 'components/LogSection';
 import LogProfile from 'components/LogProfile';
 import Dropdown from 'components/Dropdown';
@@ -33,6 +34,7 @@ const shape = {
   id_status: yup.number().required('Status is required'),
 };
 const schema = yup.object().shape(shape);
+
 const Log: FC = () => {
   const { id_mentee = 0 } = useParams();
   const MySwal = withReactContent(Swal);
@@ -80,7 +82,7 @@ const Log: FC = () => {
   });
 
   const onSubmitHandler = (data: Inputs | any) => {
-    // setLoadingProcess(true);
+    setLoadingProcess(true);
     const formData = new FormData();
     for (const key in data) {
       formData.append(key, data[key]);
@@ -135,7 +137,7 @@ const Log: FC = () => {
       </div>
       <div className="px-6">
         {/* TODO: Give condition when data feedback is empty or error */}
-        {!isLoading &&
+        {!isLoading ? (
           !isError &&
           data.mentee.feedback.map((item: any) => {
             return (
@@ -148,7 +150,10 @@ const Log: FC = () => {
                 status={item.status}
               />
             );
-          })}
+          })
+        ) : (
+          <LoadingSpinner />
+        )}
       </div>
       <Modal
         isOpen={modalAdd}

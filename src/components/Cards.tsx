@@ -10,7 +10,7 @@ const Cards: FC<Props> = ({ children, className }) => {
 
   return (
     <div
-      className={`relative mb-3 rounded-xl border bg-white p-2 shadow-lg ${cls}`}
+      className={`relative mb-3 rounded-xl border bg-white py-6 px-8 shadow-lg ${cls}`}
     >
       {children}
     </div>

@@ -20,13 +20,13 @@ const LogSection: FC<Props> = ({
 }) => {
   return (
     <Cards className="my-3 flex">
-      <div className="h-full w-full p-6">
+      <div className="h-full w-full p-2">
         <h2 className="font-inter text-xl font-bold text-black">{section}</h2>
         <p className="font-inter text-lg leading-loose text-black">{name}</p>
         <p className="font-inter font-thin text-black">{date}</p>
       </div>
-      <div className="h-full w-full p-6">
-        <p className="text-justify font-inter text-base leading-loose tracking-wide text-black">
+      <div className="h-full w-full p-2">
+        <p className="mb-3 text-justify font-inter text-base tracking-wide text-black">
           {feedback}
         </p>
         <p className="font-inter text-base font-bold text-black">
