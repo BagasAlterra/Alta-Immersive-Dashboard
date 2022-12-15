@@ -1,5 +1,5 @@
-import { FC, ButtonHTMLAttributes, LabelHTMLAttributes } from "react";
-import { clsx } from "clsx";
+import { FC, ButtonHTMLAttributes, LabelHTMLAttributes } from 'react';
+import { clsx } from 'clsx';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
@@ -20,14 +20,14 @@ interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
 
 const COLORS: any = {
   primary:
-    "bg-alta-orange hover:bg-alta-orange/90 hover:border-alta-orange text-white",
+    'bg-alta-orange border-alta-orange hover:bg-alta-orange/80 hover:border-alta-orange text-white',
   secondary:
-    "bg-slate-50 hover:bg-slate-100 hover:border-alta-orange text-alta-orange border-alta-orange",
+    'bg-slate-50 hover:bg-slate-200 hover:border-alta-orange text-alta-orange border-alta-orange',
 };
 
 const Button: FC<Props> = ({
-  variant = "primary",
-  type = "button",
+  variant = 'primary',
+  type = 'button',
   onClick,
   loading,
   label,
@@ -40,9 +40,9 @@ const Button: FC<Props> = ({
       data-theme="light"
       id={id}
       className={clsx(
-        "btn rounded-xl",
-        loading && "cursor-not-allowed",
-        fill && "w-full",
+        'btn rounded-xl',
+        loading && 'cursor-not-allowed',
+        fill && 'w-full',
         COLORS[variant]
       )}
       onClick={onClick}
@@ -56,7 +56,7 @@ const Button: FC<Props> = ({
 };
 
 const ButtonLabel: FC<LabelProps> = ({
-  variant = "primary",
+  variant = 'primary',
   onClick,
   loading,
   htmlFor,
@@ -70,9 +70,9 @@ const ButtonLabel: FC<LabelProps> = ({
       htmlFor={htmlFor}
       id={id}
       className={clsx(
-        "btn rounded-xl",
-        loading && "cursor-not-allowed",
-        fill && "w-full",
+        'btn rounded-xl',
+        loading && 'cursor-not-allowed',
+        fill && 'w-full',
         COLORS[variant]
       )}
       onClick={onClick}

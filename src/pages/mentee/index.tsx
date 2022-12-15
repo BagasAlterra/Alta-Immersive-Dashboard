@@ -160,8 +160,8 @@ const Mentee: FC = () => {
             }
           }}
           options={
-            <div className="flex w-full flex-col items-end gap-2">
-              <div className="flex gap-2">
+            <div className="mb-3 flex w-full flex-col items-end gap-2">
+              <div className="mb-3 flex gap-6">
                 {/* TODO: Add functionality for export data */}
                 <Button id="button-export" label="Export" variant="secondary" />
                 <Button
@@ -170,7 +170,7 @@ const Mentee: FC = () => {
                   onClick={() => navigate('/add-mentee')}
                 />
               </div>
-              <div className="grid w-full grid-cols-2 gap-2 lg:grid-cols-4">
+              <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
                 <Input id="input-search" name="search" placeholder="Search" />
                 {/* TODO: Add functionality for filter (Class, Status, & Category) */}
                 <Dropdown id="filter-class" name="class" placeholder="Class" />

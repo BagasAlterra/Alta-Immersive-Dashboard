@@ -15,7 +15,7 @@ import Status from 'pages/status';
 import Mentee from 'pages/mentee';
 import AddMentee from 'pages/mentee/AddMentee';
 import EditMentee from 'pages/mentee/EditMentee';
-import Log from 'pages/log';
+import Log from 'pages/mentee/DetailMentee';
 import NotFound from 'pages/NotFound';
 
 axios.defaults.baseURL =

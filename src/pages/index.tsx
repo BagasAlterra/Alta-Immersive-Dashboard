@@ -8,14 +8,14 @@ import {
   Tooltip,
   Legend,
   Title,
-} from "chart.js";
-import { Line, Pie } from "react-chartjs-2";
-import { faker } from "@faker-js/faker";
-import { FC, useState } from "react";
+} from 'chart.js';
+import { faker } from '@faker-js/faker';
+import { Line } from 'react-chartjs-2';
+import { FC, useState } from 'react';
 
-import Layout from "components/Layout";
-import Cards from "components/Cards";
-import { useTitle } from "utils/useTitle";
+import Layout from 'components/Layout';
+import Cards from 'components/Cards';
+import { useTitle } from 'utils/useTitle';
 
 ChartJS.register(
   CategoryScale,
@@ -37,7 +37,7 @@ const options = {
   responsive: true,
   plugins: {
     legend: {
-      position: "bottom" as const,
+      position: 'bottom' as const,
     },
   },
 };
@@ -53,36 +53,36 @@ const Stat: FC<StatProps> = ({ label, value }) => {
 
 const App: FC = () => {
   const labels = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
   ];
   const [data] = useState({
     labels,
     datasets: [
       {
-        label: "Dataset 1",
+        label: 'Dataset 1',
         data: labels.map(() =>
           faker.datatype.number({ min: -1000, max: 1000 })
         ),
-        borderColor: "rgb(255, 99, 132)",
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
       },
       {
-        label: "Dataset 2",
+        label: 'Dataset 2',
         data: labels.map(() =>
           faker.datatype.number({ min: -1000, max: 1000 })
         ),
-        borderColor: "rgb(53, 162, 235)",
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
+        borderColor: 'rgb(53, 162, 235)',
+        backgroundColor: 'rgba(53, 162, 235, 0.5)',
       },
     ],
   });
-  useTitle("Dashboard | Immersive Dashboard");
+  useTitle('Dashboard | Immersive Dashboard');
 
   return (
     <Layout subTitle="Dashboard">
