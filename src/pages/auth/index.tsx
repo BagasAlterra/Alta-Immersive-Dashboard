@@ -1,11 +1,11 @@
-import withReactContent from "sweetalert2-react-content";
-import { useGoogleLogin } from "@react-oauth/google";
-import { useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
-import axios from "axios";
+import withReactContent from 'sweetalert2-react-content';
+import { useGoogleLogin } from '@react-oauth/google';
+import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
 
-import Swal from "utils/Swal";
-import Button from "components/Button";
+import Swal from 'utils/Swal';
+import Button from 'components/Button';
 
 const THREE_HOUR_IN_MS = 10800000;
 
@@ -20,7 +20,7 @@ const Auth = () => {
     },
     onError: (response) => {
       MySwal.fire({
-        title: "Failed",
+        title: 'Failed',
         text: response.toString(),
         showCancelButton: false,
       });
@@ -32,23 +32,23 @@ const Auth = () => {
       oauth: response.access_token,
     };
     axios
-      .post("oauth/login", body)
+      .post('oauth/login', body)
       .then((res) => {
         const { data, message } = res.data;
         MySwal.fire({
-          title: "Success",
+          title: 'Success',
           text: message,
           showCancelButton: false,
         });
-        setCookie("token", data.token, {
-          path: "/",
+        setCookie('token', data.token, {
+          path: '/',
           expires: new Date(Date.now() + THREE_HOUR_IN_MS),
         });
-        navigate("/home");
+        navigate('/home');
       })
       .catch((err) => {
         MySwal.fire({
-          title: "Success",
+          title: 'Success',
           text: err.toString(),
           showCancelButton: false,
         });
