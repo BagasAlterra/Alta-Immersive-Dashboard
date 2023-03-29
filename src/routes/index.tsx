@@ -18,8 +18,7 @@ import EditMentee from 'pages/mentee/EditMentee';
 import Log from 'pages/mentee/DetailMentee';
 import NotFound from 'pages/NotFound';
 
-axios.defaults.baseURL =
-  'https://virtserver.swaggerhub.com/JerryBE1709/SysAsses/1.0.0/';
+axios.defaults.baseURL = 'https://dashboard.altapro.online/';
 
 const App = () => {
   const router = createBrowserRouter(
