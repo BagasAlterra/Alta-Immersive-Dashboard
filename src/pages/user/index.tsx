@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useQuery } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import axios from 'axios';
 import * as yup from 'yup';
 
@@ -14,6 +14,7 @@ import Input from 'components/Input';
 import Table from 'components/Table';
 import Cards from 'components/Cards';
 import Modal from 'components/Modal';
+import Dropdown from 'components/Dropdown';
 import { useTitle } from 'utils/useTitle';
 import Swal from 'utils/Swal';
 import Button from 'components/Button';
@@ -21,22 +22,22 @@ import Button from 'components/Button';
 interface Inputs {
   full_name: string;
   email: string;
-  team: string;
   password: string;
+  id_team: number;
   role: string;
 }
 
 interface Inputs2 {
   full_name: string;
   email: string;
-  team: string;
+  id_team: number;
   role: string;
 }
 
 const shape = {
   full_name: yup.string().required('Full name is required'),
   email: yup.string().required('Email is required'),
-  team: yup.string().required('Team is required'),
+  id_team: yup.number().required('Team is required'),
   password: yup.string().required('Password is required'),
   role: yup.string().required('Role is required'),
 };
@@ -44,7 +45,7 @@ const shape = {
 const shape2 = {
   full_name: yup.string().required('Full name is required'),
   email: yup.string().required('Email is required'),
-  team: yup.string().required('Team is required'),
+  id_team: yup.number().required('Team is required'),
   role: yup.string().required('Role is required'),
 };
 
@@ -59,6 +60,7 @@ const User: FC = () => {
   const [modalEdit, setModalEdit] = useState(false);
   const [modalAdd, setModalAdd] = useState(false);
   const [selected, setSelected] = useState(null);
+  const [teams, setTeams] = useState([]);
   const [page, setPage] = useState(1);
   useTitle('User List | Immersive Dashboard');
 
@@ -80,9 +82,8 @@ const User: FC = () => {
     resolver: yupResolver(schema2),
   });
 
-  const onSubmitHandler = (data: any) => {
-    console.log(data.full_name);
-    console.log(data.email);
+  const onSubmitHandler = (data: Inputs) => {
+    console.log('add ', data);
     setLoadingProcess(true);
     axios
       .post('users', data)
@@ -109,7 +110,7 @@ const User: FC = () => {
       });
   };
 
-  const onEditHandler = (data: any) => {
+  const onEditHandler = (data: Inputs2) => {
     setLoadingProcess(true);
     axios
       .put(`users/${selected}`, data)
@@ -169,11 +170,22 @@ const User: FC = () => {
     return data;
   };
 
-  // MySwal.fire({
-  //   title: "Error",
-  //   text: error.toString(),
-  //   showCancelButton: false,
-  // });
+  const fetchTeams = async () => {
+    const res = await axios.get('teams');
+    const { data } = res.data;
+    setTeams(data);
+  };
+
+  const itemTeam = teams.map((item: any) => {
+    return {
+      value: parseInt(item.id),
+      label: item.name,
+    };
+  });
+
+  useEffect(() => {
+    fetchTeams();
+  }, []);
 
   const { isLoading, isFetching, data, isPreviousData, refetch } = useQuery({
     queryKey: ['userList', page],
@@ -230,7 +242,7 @@ const User: FC = () => {
                 setSelected(info.row.original.id);
                 setValueEdit('full_name', info.row.original.full_name);
                 setValueEdit('email', info.row.original.email);
-                setValueEdit('team', info.row.original.team);
+                setValueEdit('id_team', parseInt(info.row.original.id_team));
                 setValueEdit('role', info.row.original.role);
               }}
             />
@@ -307,6 +319,7 @@ const User: FC = () => {
               placeholder="Full Name"
               label="Full Name"
               error={errorsAdd.full_name?.message}
+              showLabel
             />
             <Input
               register={registerAdd}
@@ -315,14 +328,16 @@ const User: FC = () => {
               placeholder="Email"
               label="Email"
               error={errorsAdd.email?.message}
+              showLabel
             />
-            <Input
+            <Dropdown
               register={registerAdd}
-              id="team"
-              name="team"
+              id="id_team"
+              name="id_team"
               placeholder="Team"
-              label="Team"
-              error={errorsAdd.team?.message}
+              error={errorsAdd.id_team?.message}
+              showLabel
+              data={itemTeam}
             />
             <Input
               register={registerAdd}
@@ -331,6 +346,7 @@ const User: FC = () => {
               label="Role"
               placeholder="Role"
               error={errorsAdd.role?.message}
+              showLabel
             />
             <Input
               register={registerAdd}
@@ -339,6 +355,7 @@ const User: FC = () => {
               label="Password"
               placeholder="Password"
               error={errorsAdd.password?.message}
+              showLabel
             />
             <div className="modal-action gap-3">
               <Button
@@ -377,6 +394,7 @@ const User: FC = () => {
               name="full_name"
               placeholder="Full Name"
               error={errorsEdit.full_name?.message}
+              showLabel
             />
             <Input
               register={registerEdit}
@@ -384,13 +402,16 @@ const User: FC = () => {
               name="email"
               placeholder="Email"
               error={errorsEdit.email?.message}
+              showLabel
             />
-            <Input
+            <Dropdown
               register={registerEdit}
-              id="team"
-              name="team"
+              id="id_team"
+              name="id_team"
               placeholder="Team"
-              error={errorsEdit.team?.message}
+              error={errorsEdit.id_team?.message}
+              showLabel
+              data={itemTeam}
             />
             <Input
               register={registerEdit}
@@ -398,6 +419,7 @@ const User: FC = () => {
               name="role"
               placeholder="Role"
               error={errorsEdit.role?.message}
+              showLabel
             />
             <div className="modal-action gap-3">
               <Button
