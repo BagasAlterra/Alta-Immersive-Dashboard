@@ -26,6 +26,13 @@ interface Inputs {
   role: string;
 }
 
+interface Inputs2 {
+  full_name: string;
+  email: string;
+  team: string;
+  role: string;
+}
+
 const shape = {
   full_name: yup.string().required('Full name is required'),
   email: yup.string().required('Email is required'),
@@ -34,7 +41,15 @@ const shape = {
   role: yup.string().required('Role is required'),
 };
 
+const shape2 = {
+  full_name: yup.string().required('Full name is required'),
+  email: yup.string().required('Email is required'),
+  team: yup.string().required('Team is required'),
+  role: yup.string().required('Role is required'),
+};
+
 const schema = yup.object().shape(shape);
+const schema2 = yup.object().shape(shape2);
 
 const User: FC = () => {
   const columnHelper = createColumnHelper<any>();
@@ -61,8 +76,8 @@ const User: FC = () => {
     register: registerEdit,
     handleSubmit: handleSubmitEdit,
     formState: { errors: errorsEdit },
-  } = useForm<Inputs>({
-    resolver: yupResolver(schema),
+  } = useForm<Inputs2>({
+    resolver: yupResolver(schema2),
   });
 
   const onSubmitHandler = (data: any) => {
@@ -216,7 +231,6 @@ const User: FC = () => {
                 setValueEdit('full_name', info.row.original.full_name);
                 setValueEdit('email', info.row.original.email);
                 setValueEdit('team', info.row.original.team);
-                setValueEdit('password', info.row.original.password);
                 setValueEdit('role', info.row.original.role);
               }}
             />
@@ -261,7 +275,7 @@ const User: FC = () => {
             }
           }}
           options={
-            <div className="flex w-full flex-col items-end gap-2">
+            <div className="flex w-full flex-col items-end gap-6">
               {/* TODO: Add functionality to input search */}
               <Button
                 id="button-add-new"
@@ -291,6 +305,7 @@ const User: FC = () => {
               id="full_name"
               name="full_name"
               placeholder="Full Name"
+              label="Full Name"
               error={errorsAdd.full_name?.message}
             />
             <Input
@@ -298,6 +313,7 @@ const User: FC = () => {
               id="email"
               name="email"
               placeholder="Email"
+              label="Email"
               error={errorsAdd.email?.message}
             />
             <Input
@@ -305,12 +321,14 @@ const User: FC = () => {
               id="team"
               name="team"
               placeholder="Team"
+              label="Team"
               error={errorsAdd.team?.message}
             />
             <Input
               register={registerAdd}
               id="role"
               name="role"
+              label="Role"
               placeholder="Role"
               error={errorsAdd.role?.message}
             />
@@ -318,6 +336,7 @@ const User: FC = () => {
               register={registerAdd}
               id="password"
               name="password"
+              label="Password"
               placeholder="Password"
               error={errorsAdd.password?.message}
             />
@@ -354,8 +373,8 @@ const User: FC = () => {
           >
             <Input
               register={registerEdit}
-              id="full-name"
-              name="name"
+              id="full_name"
+              name="full_name"
               placeholder="Full Name"
               error={errorsEdit.full_name?.message}
             />
@@ -379,13 +398,6 @@ const User: FC = () => {
               name="role"
               placeholder="Role"
               error={errorsEdit.role?.message}
-            />
-            <Input
-              register={registerEdit}
-              id="password"
-              name="password"
-              placeholder="Password"
-              error={errorsEdit.password?.message}
             />
             <div className="modal-action gap-3">
               <Button
