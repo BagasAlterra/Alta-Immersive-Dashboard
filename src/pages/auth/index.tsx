@@ -32,7 +32,10 @@ const Auth = () => {
       oauth: response.access_token,
     };
     axios
-      .post('oauth/login', body)
+      .post(
+        'https://virtserver.swaggerhub.com/JerryBE1709/SysAsses/1.0.0/oauth/login',
+        body
+      )
       .then((res) => {
         const { data, message } = res.data;
         MySwal.fire({
